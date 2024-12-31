@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juanhern <juanhern@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: juanhern <juanhern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-05-13 13:21:41 by juanhern          #+#    #+#             */
-/*   Updated: 2024-05-13 13:21:41 by juanhern         ###   ########.fr       */
+/*   Created: 2024/05/13 13:21:41 by juanhern          #+#    #+#             */
+/*   Updated: 2024/12/31 20:47:37 by juanhern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@ static char	*get_line(char **extra, int fd)
 	while (extra[fd][i] && extra[fd][i] != '\n')
 		i++;
 	line = ft_substr(extra[fd], 0, i + 1);
-	temp = ft_strdup(&extra[fd][i + 1]);
-	free(extra[fd]);
-	extra[fd] = temp;
+	if (extra[fd][i + 1] && extra[fd][i + 1] != '\0')
+	{
+		temp = ft_strdup(&extra[fd][i + 1]);
+		free(extra[fd]);
+		extra[fd] = temp;
+	}
+	else
+	{
+		free(extra[fd]);
+		extra[fd] = NULL;
+	}
 	return (line);
 }
 
